@@ -77,7 +77,7 @@ describe('iterateBallArray :: ', () => {
     const initialH = 0;
     const initialY = testSettings.windowHeight - initialH;
     let ball = new Ball({x: 100, y: initialY, h: initialH}, {x: 2, h: 0});
-    ball.roll = true;
+    ball.rolling = true;
     const ballArray = [ball];
     expect(ballArray[0].active).toBe(true);
     
@@ -91,7 +91,7 @@ describe('iterateBallArray :: ', () => {
     const initialH = 0;
     const initialY = testSettings.windowHeight - initialH;
     let ball = new Ball({x: 100, y: initialY, h: initialH}, {x: 0, h: 0});
-    ball.roll = true;
+    ball.rolling = true;
     ball.active = false;
     const ballArray = [ball];
 
