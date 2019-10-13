@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'aphrodite';
 import styles from './window-styles';
+import random from '../lib/random';
 
 export const RESIZE = 'resize';
 
@@ -36,7 +37,11 @@ class Window extends React.Component {
     const { windowHeight, balls } = this.state;
     const h = windowHeight - y;
 
-    this.setState({ balls: balls.concat({ pos: { x, y, h }, vel: { x: 10, h: 10 } }) });
+    const randomVelX = random(100);
+    const randomVelH = random(100);
+    this.setState({
+      balls: balls.concat({ pos: { x, y, h }, vel: { x: randomVelX, h: randomVelH } }),
+    });
   }
 
   render() {
