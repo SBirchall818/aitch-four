@@ -3,6 +3,7 @@ const GRAVITY = -400;
 const BOUNCE_COEFFICIENT = 0.5;
 const ROLL_POS_EPSILON = 5;
 const ROLL_VEL_EPSILON = 3;
+const ROLLING_FRICTION_COEFFICIENT = 0.9;
 
 export function iterateBallFn({
   ts,
@@ -11,9 +12,11 @@ export function iterateBallFn({
   bounceCoefficient,
   rollPosEpsilon,
   rollVelEpsilon,
+  rollingFrictionCoefficient,
 }) {
   return (ball) => {
     const b = { ...ball };
+
     // If not already rolling and close to the bottom of the screen
     // with a small absolute vertical velocity then set vertical position
     // and velocity to zero and set into rolling mode
@@ -25,6 +28,11 @@ export function iterateBallFn({
 
     // Iterate ball position along x axis even if rolling
     b.pos.x += b.vel.x * ts;
+
+    if (b.rolling) {
+      // slow x down
+      b.vel.x *= rollingFrictionCoefficient;
+    }
     if (!b.rolling) {
       // Iterate gravity's effect on vertical velocity
       b.vel.h += gravity * ts;
@@ -54,6 +62,7 @@ export default function iterateBallArray(ballArray, windowHeight) {
     bounceCoefficient: BOUNCE_COEFFICIENT,
     rollPosEpsilon: ROLL_POS_EPSILON,
     rollVelEpsilon: ROLL_VEL_EPSILON,
+    rollingFrictionCoefficient: ROLLING_FRICTION_COEFFICIENT,
   }));
 
   return iteratedBalls;

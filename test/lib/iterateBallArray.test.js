@@ -8,6 +8,7 @@ const testSettings = {
   bounceCoefficient: 0.5,
   rollPosEpsilon: 5,
   rollVelEpsilon: 3,
+  rollingFrictionCoefficient: 0.9,
 };
 
 describe('iterateBallArray :: ', () => {
@@ -53,7 +54,21 @@ describe('iterateBallArray :: ', () => {
     expect(result[0].rolling).toBe(true);
     expect(result[0].pos.x).toEqual(110);
     expect(result[0].pos.h).toEqual(0);
-    expect(result[0].vel.x).toEqual(100);
+    expect(result[0].vel.h).toEqual(0);
+  });
+
+  it('should slow balls in roll mode down', () => {
+    const perBallIterationFn = iterateBallFn(testSettings);
+    const initialH = 0;
+    const initialY = testSettings.windowHeight - initialH;
+    let ball = new Ball({x: 100, y: initialY, h: initialH}, {x: 100, h: 0});
+    ball.rolling = true;
+    const ballArray = [ball];
+
+    const result = ballArray.map(perBallIterationFn);
+    expect(result[0].pos.x).toEqual(110);
+    expect(result[0].vel.x).toEqual(90);
+    expect(result[0].pos.h).toEqual(0);
     expect(result[0].vel.h).toEqual(0);
   });
 });
