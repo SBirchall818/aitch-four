@@ -1,4 +1,6 @@
 import React from 'react';
+import { css } from 'aphrodite';
+import styles from './window-styles';
 
 export const RESIZE = 'resize';
 
@@ -29,7 +31,7 @@ class Window extends React.Component {
   render() {
     const { windowHeight, windowWidth } = this.state;
     return (
-      <div style={{ height: windowHeight, width: windowWidth, backgroundColor: 'red' }} />
+      <div className={css(styles.root)} style={{ height: windowHeight, width: windowWidth }} />
     );
   }
 }

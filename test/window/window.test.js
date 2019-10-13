@@ -1,9 +1,18 @@
 import React from 'react';
+import { StyleSheetTestUtils } from 'aphrodite';
 import { shallow } from 'enzyme';
 
 import Window, { RESIZE } from '../../src/window/Window';
 
 describe('Window :: ', () => {
+  beforeEach(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterEach(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('should exist', () => {
     expect(Window).toBeDefined();
   });
