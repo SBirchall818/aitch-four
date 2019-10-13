@@ -85,4 +85,20 @@ describe('iterateBallArray :: ', () => {
     expect(result[0].active).toBe(false);
     expect(result[0].vel.x).toEqual(0);
   });
+
+  it('should not move stopped balls', () => {
+    const perBallIterationFn = iterateBallFn(testSettings);
+    const initialH = 0;
+    const initialY = testSettings.windowHeight - initialH;
+    let ball = new Ball({x: 100, y: initialY, h: initialH}, {x: 0, h: 0});
+    ball.roll = true;
+    ball.active = false;
+    const ballArray = [ball];
+
+    const result = ballArray.map(perBallIterationFn);
+    expect(result[0].pos.x).toEqual(100);
+    expect(result[0].vel.x).toEqual(0);
+    expect(result[0].pos.h).toEqual(0);
+    expect(result[0].vel.h).toEqual(0);
+  });
 });
