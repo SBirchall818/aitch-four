@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BallView ::  should render BallView with defaults 1`] = `
+<span
+  className="root_936sk"
+  style={
+    Object {
+      "left": 0,
+      "top": 0,
+    }
+  }
+/>
+`;
