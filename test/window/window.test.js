@@ -3,6 +3,8 @@ import renderer from 'react-test-renderer';
 import { StyleSheetTestUtils } from 'aphrodite';
 import { shallow } from 'enzyme';
 
+import Ball from '../../src/ball/Ball';
+import BallView from '../../src/ball/BallView';
 import Window, { RESIZE } from '../../src/window/Window';
 
 describe('Window :: ', () => {
@@ -43,5 +45,15 @@ describe('Window :: ', () => {
     const component = renderer.create(<Window />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  test('renders balls when balls are in state', () => {
+    const appComponent = shallow(<Window />);
+    const balls = [
+      new Ball({x: 50, y: 50, h: 718}, {x: 20, h: 20}),
+      new Ball({x: 150, y: 150, h: 618}, {x: -20, h: -20}),
+    ];
+    appComponent.setState({balls});
+    expect(appComponent.find(BallView).length).toBe(2);
   });
 });

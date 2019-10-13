@@ -2,6 +2,8 @@ import React from 'react';
 import { css } from 'aphrodite';
 import styles from './window-styles';
 import random from '../lib/random';
+import Ball from '../ball/Ball';
+import BallView from '../ball/BallView';
 
 export const RESIZE = 'resize';
 
@@ -39,19 +41,20 @@ class Window extends React.Component {
 
     const randomVelX = random(100);
     const randomVelH = random(100);
-    this.setState({
-      balls: balls.concat({ pos: { x, y, h }, vel: { x: randomVelX, h: randomVelH } }),
-    });
+    this.setState({ balls: balls.concat(new Ball({ x, y, h }, { x: randomVelX, h: randomVelH })) });
   }
 
   render() {
-    const { windowHeight, windowWidth } = this.state;
+    const { balls, windowHeight, windowWidth } = this.state;
+    const ballList = balls.map((b) => <BallView key={b.key} x={b.pos.x} y={b.pos.y} />);
     return (
       <div
         onClick={this.handleClick}
         className={css(styles.root)}
         style={{ height: windowHeight, width: windowWidth }}
-      />
+      >
+        {ballList}
+      </div>
     );
   }
 }
