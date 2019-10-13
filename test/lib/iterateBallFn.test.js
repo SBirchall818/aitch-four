@@ -11,7 +11,7 @@ const testSettings = {
   rollingFrictionCoefficient: 0.9,
 };
 
-describe('iterateBallArray :: ', () => {
+describe('iterateBallFn :: ', () => {
   it('should have iterateBallFn', () => {
     expect(iterateBallFn).toBeDefined();
   });

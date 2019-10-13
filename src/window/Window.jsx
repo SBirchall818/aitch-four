@@ -52,8 +52,8 @@ class Window extends React.Component {
   }
 
   tick() {
-    const { balls, windowHeight } = this.state;
-    const ballArrayNextState = iterateBallArray(balls, windowHeight);
+    const { balls, windowWidth, windowHeight } = this.state;
+    const ballArrayNextState = iterateBallArray(balls, windowWidth, windowHeight);
     this.setState({ balls: ballArrayNextState });
   }
 
