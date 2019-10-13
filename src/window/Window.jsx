@@ -10,9 +10,11 @@ class Window extends React.Component {
     this.state = {
       windowWidth: 0,
       windowHeight: 0,
+      balls: [],
     };
 
     this.handleSizeChange = this.handleSizeChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -28,10 +30,23 @@ class Window extends React.Component {
     this.setState({ windowWidth: window.innerWidth, windowHeight: window.innerHeight });
   }
 
+  handleClick(e) {
+    e.preventDefault();
+    const { x, y } = e.nativeEvent;
+    const { windowHeight, balls } = this.state;
+    const h = windowHeight - y;
+
+    this.setState({ balls: balls.concat({ pos: { x, y, h }, vel: { x: 10, h: 10 } }) });
+  }
+
   render() {
     const { windowHeight, windowWidth } = this.state;
     return (
-      <div className={css(styles.root)} style={{ height: windowHeight, width: windowWidth }} />
+      <div
+        onClick={this.handleClick}
+        className={css(styles.root)}
+        style={{ height: windowHeight, width: windowWidth }}
+      />
     );
   }
 }

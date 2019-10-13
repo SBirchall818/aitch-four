@@ -28,4 +28,13 @@ describe('Window :: ', () => {
     expect(appComponent.state().windowWidth).toEqual(newWidth);
     expect(appComponent.state().windowHeight).toEqual(newHeight);
   });
+
+  it('adds a ball to App state when it is clicked', () => {
+    const clickCoord = {x: 100, y: 120};
+    const appComponent = shallow(<Window />);
+    appComponent.find('div').simulate('click', { preventDefault() {}, nativeEvent: clickCoord });
+    expect(appComponent.state().balls.length).toEqual(1);
+    expect(appComponent.state().balls[0].pos.x).toEqual(clickCoord.x);
+    expect(appComponent.state().balls[0].pos.y).toEqual(clickCoord.y);
+  });
 });
