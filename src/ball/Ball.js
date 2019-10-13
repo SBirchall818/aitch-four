@@ -3,6 +3,7 @@ export default class Ball {
     this.pos = pos; // {x, y, h}
     this.vel = vel; // {x, h}
     this.key = Ball.getKey();
+    this.rolling = false;
   }
 
   static getKey() {
