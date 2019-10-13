@@ -4,8 +4,10 @@ import styles from './window-styles';
 import random from '../lib/random';
 import Ball from '../ball/Ball';
 import BallView from '../ball/BallView';
+import iterateBallArray from '../lib/iterateBallArray';
 
 export const RESIZE = 'resize';
+export const TICK_MS = 50;
 
 class Window extends React.Component {
   constructor(props) {
@@ -18,15 +20,20 @@ class Window extends React.Component {
 
     this.handleSizeChange = this.handleSizeChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.tick = this.tick.bind(this);
   }
 
   componentDidMount() {
     this.handleSizeChange();
     window.addEventListener(RESIZE, this.handleSizeChange);
+    const intervalRef = setInterval(this.tick, TICK_MS);
+    this.setState({ intervalRef });
   }
 
   componentWillUnmount() {
     window.removeEventListener(RESIZE, this.handleSizeChange);
+    const { intervalRef } = this.state;
+    clearInterval(intervalRef);
   }
 
   handleSizeChange() {
@@ -44,8 +51,14 @@ class Window extends React.Component {
     this.setState({ balls: balls.concat(new Ball({ x, y, h }, { x: randomVelX, h: randomVelH })) });
   }
 
+  tick() {
+    const { balls, windowHeight } = this.state;
+    const ballArrayNextState = iterateBallArray(balls, windowHeight);
+    this.setState({ balls: ballArrayNextState });
+  }
+
   render() {
-    const { balls, windowHeight, windowWidth } = this.state;
+    const { balls, windowWidth, windowHeight } = this.state;
     const ballList = balls.map((b) => <BallView key={b.key} x={b.pos.x} y={b.pos.y} />);
     return (
       <div
