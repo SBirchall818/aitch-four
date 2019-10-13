@@ -4,7 +4,7 @@ import { BALL_RADIUS } from '../lib/settings';
 const styles = StyleSheet.create({
   root: {
     position: 'absolute',
-    backgroundColor: 'green',
+    backgroundColor: 'hsla(120, 87%, 46%, 0.68)',
     height: `${BALL_RADIUS * 2}px`,
     width: `${BALL_RADIUS * 2}px`,
     borderRadius: '50%',

@@ -5,7 +5,7 @@ import random from '../lib/random';
 import Ball from '../ball/Ball';
 import BallView from '../ball/BallView';
 import iterateBallArray from '../lib/iterateBallArray';
-import { TICK_MS } from '../lib/settings';
+import { TICK_MS, RANDOM_RANGE } from '../lib/settings';
 
 export const RESIZE = 'resize';
 
@@ -46,8 +46,8 @@ class Window extends React.Component {
     const { windowHeight, balls } = this.state;
     const h = windowHeight - y;
 
-    const randomVelX = random(100);
-    const randomVelH = random(100);
+    const randomVelX = random(RANDOM_RANGE);
+    const randomVelH = random(RANDOM_RANGE);
     this.setState({ balls: balls.concat(new Ball({ x, y, h }, { x: randomVelX, h: randomVelH })) });
   }
 

@@ -2,7 +2,7 @@
 
 exports[`BallView ::  should render BallView with defaults 1`] = `
 <span
-  className="root_936sk"
+  className="root_1lhkqwa"
   style={
     Object {
       "left": 0,
