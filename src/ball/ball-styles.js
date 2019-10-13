@@ -1,13 +1,14 @@
 import { StyleSheet } from 'aphrodite';
+import { BALL_RADIUS } from '../lib/settings';
 
 const styles = StyleSheet.create({
   root: {
     position: 'absolute',
     backgroundColor: 'green',
-    height: '30px',
-    width: '30px',
+    height: `${BALL_RADIUS * 2}px`,
+    width: `${BALL_RADIUS * 2}px`,
     borderRadius: '50%',
-    transform: 'translate(-15px, -30px)',
+    transform: `translate(-${BALL_RADIUS}px, -${BALL_RADIUS * 2}px)`,
   },
 });
 

@@ -5,9 +5,9 @@ import random from '../lib/random';
 import Ball from '../ball/Ball';
 import BallView from '../ball/BallView';
 import iterateBallArray from '../lib/iterateBallArray';
+import { TICK_MS } from '../lib/settings';
 
 export const RESIZE = 'resize';
-export const TICK_MS = 50;
 
 class Window extends React.Component {
   constructor(props) {

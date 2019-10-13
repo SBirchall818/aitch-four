@@ -1,26 +1,19 @@
+import * as settings from './settings';
 import iterateBallFn from './iterateBallFn';
 import outOfBoundsFilter from './outOfBoundsFilter';
-
-const TICK_MS = 50;
-const GRAVITY = -400;
-const BOUNCE_COEFFICIENT = 0.5;
-const ROLL_POS_EPSILON = 5;
-const ROLL_VEL_EPSILON = 3;
-const ROLLING_FRICTION_COEFFICIENT = 0.9;
-const BALL_RADIUS = 15;
 
 // Return an array with the next state of the balls
 export default function iterateBallArray(ballArray, windowWidth, windowHeight) {
   const iteratedBalls = ballArray.map(iterateBallFn({
-    ts: TICK_MS / 1000,
-    gravity: GRAVITY,
+    ts: settings.TICK_MS / 1000,
+    gravity: settings.GRAVITY,
     windowHeight,
-    bounceCoefficient: BOUNCE_COEFFICIENT,
-    rollPosEpsilon: ROLL_POS_EPSILON,
-    rollVelEpsilon: ROLL_VEL_EPSILON,
-    rollingFrictionCoefficient: ROLLING_FRICTION_COEFFICIENT,
+    bounceCoefficient: settings.BOUNCE_COEFFICIENT,
+    rollPosEpsilon: settings.ROLL_POS_EPSILON,
+    rollVelEpsilon: settings.ROLL_VEL_EPSILON,
+    rollingFrictionCoefficient: settings.ROLLING_FRICTION_COEFFICIENT,
   }));
 
-  const remainingBalls = iteratedBalls.filter(outOfBoundsFilter(BALL_RADIUS, windowWidth));
+  const remainingBalls = iteratedBalls.filter(outOfBoundsFilter(settings.BALL_RADIUS, windowWidth));
   return remainingBalls;
 }
