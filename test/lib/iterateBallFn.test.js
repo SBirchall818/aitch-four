@@ -1,5 +1,5 @@
 import Ball from '../../src/ball/Ball';
-import { iterateBallFn } from '../../src/lib/iterateBallArray';
+import iterateBallFn from '../../src/lib/iterateBallFn';
 
 const testSettings = {
   ts: 0.1,
