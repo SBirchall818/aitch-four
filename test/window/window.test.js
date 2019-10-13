@@ -1,4 +1,5 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { StyleSheetTestUtils } from 'aphrodite';
 import { shallow } from 'enzyme';
 
@@ -36,5 +37,11 @@ describe('Window :: ', () => {
     expect(appComponent.state().balls.length).toEqual(1);
     expect(appComponent.state().balls[0].pos.x).toEqual(clickCoord.x);
     expect(appComponent.state().balls[0].pos.y).toEqual(clickCoord.y);
+  });
+
+  it('should render Window defaults', () => {
+    const component = renderer.create(<Window />);
+    let tree = component.toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

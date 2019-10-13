@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Window ::  should render Window defaults 1`] = `
+<div
+  className="root_k554e1"
+  onClick={[Function]}
+  style={
+    Object {
+      "height": 600,
+      "width": 500,
+    }
+  }
+/>
+`;
