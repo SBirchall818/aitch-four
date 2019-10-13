@@ -5,6 +5,7 @@ const testSettings = {
   ts: 0.1,
   gravity: -400,
   windowHeight: 1000,
+  bounceCoefficient: 0.5,
 };
 
 describe('iterateBallArray :: ', () => {
@@ -25,5 +26,17 @@ describe('iterateBallArray :: ', () => {
     expect(result[0].pos.h).toEqual(506);
     expect(result[0].vel.x).toEqual(100);
     expect(result[0].vel.h).toEqual(60);
+  });
+
+  it('should bounce balls that hit the bottom', () => {
+    const perBallIterationFn = iterateBallFn(testSettings);
+    const initialH = 2;
+    const initialY = testSettings.windowHeight - initialH;
+    const ballArray = [new Ball({x: 100, y: initialY, h: initialH}, {x: 0, h: -100})];
+    const result = ballArray.map(perBallIterationFn);
+    expect(result[0].pos.x).toEqual(100);
+    expect(result[0].pos.h).toEqual(0);
+    expect(result[0].vel.x).toEqual(0);
+    expect(result[0].vel.h).toEqual(70);
   });
 });
