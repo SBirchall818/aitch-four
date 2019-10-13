@@ -71,4 +71,18 @@ describe('iterateBallArray :: ', () => {
     expect(result[0].pos.h).toEqual(0);
     expect(result[0].vel.h).toEqual(0);
   });
+
+  it('should stop slow rolling balls', () => {
+    const perBallIterationFn = iterateBallFn(testSettings);
+    const initialH = 0;
+    const initialY = testSettings.windowHeight - initialH;
+    let ball = new Ball({x: 100, y: initialY, h: initialH}, {x: 2, h: 0});
+    ball.roll = true;
+    const ballArray = [ball];
+    expect(ballArray[0].active).toBe(true);
+    
+    const result = ballArray.map(perBallIterationFn);
+    expect(result[0].active).toBe(false);
+    expect(result[0].vel.x).toEqual(0);
+  });
 });

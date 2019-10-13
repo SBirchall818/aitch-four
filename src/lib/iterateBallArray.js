@@ -30,8 +30,14 @@ export function iterateBallFn({
     b.pos.x += b.vel.x * ts;
 
     if (b.rolling) {
-      // slow x down
+      // slow x down by applying rolling friction coefficient
       b.vel.x *= rollingFrictionCoefficient;
+
+      // Deactivate slow rolling balls
+      if (Math.abs(b.vel.x) < rollVelEpsilon) {
+        b.vel.x = 0;
+        b.active = false;
+      }
     }
     if (!b.rolling) {
       // Iterate gravity's effect on vertical velocity

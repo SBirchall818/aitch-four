@@ -4,6 +4,7 @@ export default class Ball {
     this.vel = vel; // {x, h}
     this.key = Ball.getKey();
     this.rolling = false;
+    this.active = true;
   }
 
   static getKey() {
